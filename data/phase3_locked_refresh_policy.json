@@ -1,0 +1,11 @@
+{
+  "original_private_ledger_sha256": "c8fa9126a5daa6304160e82e3b800db586e0a92ed327fb9cc7395803563ad5b0",
+  "schema_version": "phase3-locked-telemetry-refresh-policy-v1",
+  "locked_at_utc": "2026-11-10T02:47:19.377917+00:00",
+  "chronological_isolation_attestation": "Locked strictly AFTER Experiment 4 Window 1 Development (W_P3_Dev_069..080) completed at 2026-11-10T02:45:22.527999+00:00 and strictly BEFORE generating, compiling, or submitting either Blind Holdout window (Window 2: W_P3_ModHold_037..042; Window 3: W_P3_ModHold_043..048).",
+  "source_w1_dev_results_sha256": "c6bbdf945afd532d21c80c17a1ed71c8f87cc86bca28db33823c800da9164bb9",
+  "w1_dev_empirical_findings": {
+    "ibm_heron": "Across 1.8d-6.8d horizons on ibm_kingston, keeping cached T0 placements (C1_Keep_Original_Stale: 11/12 accepted, mean F_B=0.9244) matched or exceeded C2 (10/12, 0.9187), C3 (10/12, 0.9166), and C4 ibm_fez switch (10/12, 0.9162) at zero live recompilation cost.",
+    "iqm_crystal_54q": "On emerald, placement-only update C2_Update_Placement_Only (0.19s mean CPU, zero resynthesis) improved mean F_B from 0.8334 (C1) to 0.8491 (+0.0157), capturing nearly the full benefit of C3_Recompile_Fresh_Same_QPU (0.8503, 2.98s mean CPU), while C4 garnet switch degraded mean F_B to 0.7827."
+  }
+}

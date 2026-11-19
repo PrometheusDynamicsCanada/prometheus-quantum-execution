@@ -1,0 +1,31 @@
+{
+  "original_private_ledger_sha256": "77bb8ac25c55af34993edcdd1335f76f64e65de157e478f5700bf40c22cdb14b",
+  "schema_version": "phase3-locked-autonomous-policy-selector-v1",
+  "locked_at_utc": "2026-11-09T20:53:30.752092+00:00",
+  "chronological_isolation_attestation": "Locked strictly after Experiment 1 Part A (W_P3_Dev_045..068) completion and strictly BEFORE generating, compiling, or accessing any Blind Holdout workload (W_P3_ModHold_001..036 or W_P3_CustHold_001..072).",
+  "source_development_artifacts": {
+    "packing_fallback_rule_sha256": "6889585fae19e99954661ebd75564489070f1dcaa890f418a5818693479a79c8",
+    "exp1_part_a_dev_results_sha256": "07aadd73626c1dd2aa4672d6a5c0410e4b76809434f72da2a1e71730a1588650",
+    "part_a_completed_at_utc": "2026-11-09T20:50:35.115254+00:00"
+  },
+  "best_dev_selected_fixed_policy": {
+    "ibm": {
+      "policy_id": "A4_Fixed_4Way_Prometheus",
+      "compiler": "Prometheus",
+      "packing_k": 4,
+      "min_buffer_d_G": 2,
+      "part_a_dev_qualifying_per_second": 4.5,
+      "part_a_dev_attainment_rate": 0.75,
+      "part_a_dev_mean_fb": 0.914032
+    },
+    "iqm": {
+      "policy_id": "A4_Fixed_4Way_Prometheus",
+      "compiler": "Prometheus",
+      "packing_k": 4,
+      "min_buffer_d_G": 2,
+      "part_a_dev_qualifying_per_credit": 2.9333,
+      "part_a_dev_attainment_rate": 0.458333,
+      "part_a_dev_mean_fb": 0.832603
+    }
+  }
+}
