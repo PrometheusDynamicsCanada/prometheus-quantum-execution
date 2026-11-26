@@ -1,24 +1,26 @@
-# Automated Queue Management & Live Shot Stopping
+# Automated Queue Batching & Early Measurement Stopping
 
 *Portfolio Hub: [Prometheus Quantum Overview](https://github.com/PrometheusDynamicsCanada/prometheus-quantum-overview) · [Phase 3 Capstone Report](reports/prometheus_phase3_capstone_evidence_release.md) · [Data Dictionary](DATA_DICTIONARY.md)*
 
-## Introduction
+Teams operating shared quantum queues must decide when to pack circuits together, when to refresh calibration data, and when enough measurement shots have been collected. We tested Prometheus's automated queue policy against the strongest fixed 4-way baseline across 72 unseen customer-style requests on 156-qubit IBM Kingston and 54-qubit IQM Emerald.
 
-- **The question:** How should a shared queue of incoming quantum jobs decide packing concurrency, calibration refreshes, and measurement stopping on live cloud hardware?
-- **The test:** Across `157` provider records (`149` benchmark + `8` auxiliary jobs, `308` disjoint unseen workloads, `2,509` PUBs, `2,093,568` shots on `IBM Kingston` and `IQM Emerald`), we compared Prometheus's autonomous service policy against the best development-selected fixed `4-way` baseline on `72` unseen customer-queue requests (`36` per provider), alongside dedicated telemetry-refresh and sequential shot-stopping experiments.
-- **The finding:** On `IBM Kingston`, Prometheus accepted **`30/36` vs. `27/36` requests (`+11.1%` per billed second)** at the **same `18.00` billed seconds** (`12/12` vs. `8/12` on strict-tier requests). On `IQM Emerald`, Prometheus accepted **`22/36` vs. `12/36` requests (`+83.3%` yield)** at matched `0.67` accepted/credit efficiency. Across sequential shot stopping (`256 -> 2,048` shots), **`0` of `31`** early stops failed independent confirmation (`-68.75%` Stage-1 IBM shots).
-- **The significance:** Platform teams can automate multi-circuit batching and early shot termination without degrading certified output rates.
-- **The boundary:** On `IQM Emerald`, adding a selective retry wave raised total accepted yield (`19 -> 22`) while increasing credit spend (`25.50 -> 33.00 cr`), matching the baseline's `0.67` accepted/credit ratio overall.
-- **The evidence:** Queue workflow graphic and summary table below, with all `Phase 1-3` module tables, `CRVE` statistical tests, and offline verification underneath.
+On IBM Kingston, Prometheus accepted 30 of 36 requests versus 27 of 36 for the fixed baseline (+11.1% accepted per billed second) at the exact same 18.00 billed seconds, including 12 of 12 versus 8 of 12 on strict-tier requests. On IQM Emerald, Prometheus raised accepted requests from 12 of 36 to 22 of 36 (+83.3% yield), and across sequential shot-stopping tests (256 to 2,048 shots), 0 of 31 early stops failed independent confirmation while cutting initial IBM shot usage by 68.8%.
+
+On IQM Emerald, adding a selective retry wave raised total accepted requests (19 to 22) while increasing total credit spend (25.50 to 33.00 credits), matching the baseline's 0.67 accepted-per-credit ratio overall.
+
+This repository contains the results, raw measurements, and offline verification tools from 149 completed benchmark jobs (157 total provider records, 2.09 million measurement shots).
 
 ![Automated Queue Workflow and Separated IBM vs. IQM Queue Economics](assets/fig0_opening_queue_workflow_and_economics.png)
-*Opening summary: Queue workflow and separated billing outcomes across 72 unseen customer requests on IBM Kingston and IQM Emerald.*
+*Summary figure: Queue workflow and separated billing outcomes across 72 unseen requests on IBM Kingston and IQM Emerald.*
+
+**[Read the detailed results](#detailed-results) · [Verify the data](#verify-the-data) · [Request an evaluation](https://prometheusdynamics.ca/connect/) · [Book a demonstration](mailto:william@prometheusdynamics.ca?subject=Prometheus%20Evaluation)**
 
 ---
 
+<a id="detailed-results"></a>
 ## Executive Summary (`Experiment 2` Simulated Customer Queue on Live Hardware, `72` Unseen Requests)
 
-*Hardware IDs:* IBM `dbpfuvk4148s739ui3l0`..`dbpg0p8ou4as73ctjs1g` (`12` jobs); IQM `01a1c539-e6bc..`..`01a1c546-d98d..` (`15` jobs). `*(mean)*` observables shown:
+*Hardware IDs:* IBM `dbpfuvk4148s739ui3l0`..`dbpg0p8ou4as73ctjs1g` (`12` jobs); IQM `01a1c539-e6bc..`..`01a1c546-d98d..` (`15` jobs). *(mean)* observables shown:
 
 | Provider & Service Policy | Accepted `(↑)` | Billed Spend `(↓)` | Acc / Billed `(↑)` | Output Agreement $F_B$ `(↑)` | Squared Hellinger $F_H$ `(↑)` | `TVD` `(↓)` | Entropy `(↓)` | `2Q` Gates / Depth `(↓)` |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -32,11 +34,12 @@
 
 ---
 
+<a id="verify-the-data"></a>
 ## Inspect the Evidence & Reproduce Supported Checks Offline
 
 - **Command:** `python scripts/verify_execution_service_campaign.py`
 - **Dependencies & measured runtime:** Python 3 + `numpy` + `scipy` (`0` cloud credentials, **`~0.75 s`** measured runtime; audits `157` provider records, sequential stopping ladders, `CRVE` p-values, and SHA-256 manifests).
-- **Start a pilot:** [william@prometheusdynamics.ca](mailto:william@prometheusdynamics.ca) | [prometheusdynamics.ca](https://prometheusdynamics.ca)
+- **Request an evaluation or book a demonstration:** [prometheusdynamics.ca/connect](https://prometheusdynamics.ca/connect/) | [william@prometheusdynamics.ca](mailto:william@prometheusdynamics.ca?subject=Prometheus%20Evaluation)
 
 ---
 
